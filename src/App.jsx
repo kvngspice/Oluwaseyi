@@ -556,7 +556,7 @@ export default function App() {
 
             <div className="b-cell b-3 b-rose-lt b-roles reveal d2">
               <div className="b-role-tag rt1">Chief of Staff</div>
-              <div className="b-role-tag rt2">Solutions Partner</div>
+              <div className="b-role-tag rt2">Strategic Advisor</div>
               <div className="b-role-tag rt1">Founder · Dome</div>
               <div className="b-role-tag rt2">Creator · @mommychoplife</div>
               <div className="b-role-tag rt3">Japada Series</div>
