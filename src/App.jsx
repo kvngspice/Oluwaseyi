@@ -87,7 +87,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .b-rose-lt{background:var(--rose-lt);padding:36px}
 .b-photo{width:100%;height:100%;min-height:380px;background:linear-gradient(135deg,var(--rose-dk) 0%,var(--plum) 55%,var(--ink) 100%);display:flex;align-items:flex-end;padding:32px;position:relative}
 .b-photo .photo-lbl{font-family:var(--serif);font-size:30px;font-weight:800;color:var(--rose-lt);line-height:1.1;position:relative;z-index:1}
-.b-photo::after{content:;position:absolute;top:20px;left:20px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,236,.3)}
+.b-photo::after{content:"";position:absolute;top:20px;left:20px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,236,.3)}
 .b-quote blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,22px);color:var(--rose-lt);line-height:1.45}
 .b-quote cite{display:block;margin-top:14px;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--champ);font-style:normal}
 .b-stat .sn{font-family:var(--serif);font-weight:900;font-size:clamp(42px,5.5vw,64px);line-height:1;color:var(--rose)}
@@ -103,7 +103,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   .about{padding:80px 24px}
   .bento{grid-template-columns:1fr 1fr;gap:12px}
   .b-1,.b-2,.b-3,.b-4,.b-5{grid-column:auto;grid-row:auto}
-  .b-photo{min-height:260px}
+  .b-photo{height:auto;min-height:0;aspect-ratio:3/4}
 }
 @media(max-width:540px){.bento{grid-template-columns:1fr}}
 
@@ -116,8 +116,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .c-sub{font-size:16px;color:rgba(247,242,236,.5);margin-top:18px;max-width:48ch;line-height:1.6}
 .career-shell{position:relative}
 .career-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.career-shell.static .career-sticky{position:static;height:auto;justify-content:flex-start;padding-bottom:20px}
 .career-track-outer{overflow:hidden}
-.career-track{display:flex;padding:0 48px;will-change:transform;transition:transform .05s linear}
+.career-track{display:flex;padding:0 48px;will-change:transform}
 .career-node{flex:0 0 360px;padding-right:48px}
 .cn-line{height:1px;background:linear-gradient(to right,var(--rose),transparent);margin-bottom:30px;position:relative}
 .cn-line::before{content:"";position:absolute;left:0;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 3px rgba(230,183,189,.2)}
@@ -131,9 +132,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .career-drag{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,236,.22);white-space:nowrap}
 @media(max-width:800px){
   .career-head{padding:0 24px 48px}
-  .career-track{padding:0 24px}
-  .career-node{flex:0 0 290px;padding-right:32px}
-  .career-prog-row{padding:18px 24px 36px}
+  /* Mobile: native horizontal swipe instead of the desktop scroll-hijack */
+  .career-shell{height:auto !important}
+  .career-sticky{position:static;height:auto;overflow:visible;justify-content:flex-start}
+  .career-track-outer{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain}
+  .career-track-outer::-webkit-scrollbar{display:none}
+  .career-track{padding:0 24px;transform:none !important}
+  .career-node{flex:0 0 82%;padding-right:20px;scroll-snap-align:start}
+  .career-prog-row{padding:16px 24px 40px}
 }
 
 /* BUILDS */
@@ -324,43 +330,86 @@ export default function App() {
     return () => rio.disconnect();
   }, []);
 
-  /* CAREER HORIZONTAL SCROLL */
+  /* CAREER — desktop: scroll-driven horizontal (rAF-smoothed).
+     mobile: native touch side-scroll. Progress bar tracks both. */
   useEffect(() => {
     const shell = shellRef.current;
     const track = trackRef.current;
     const fill = fillRef.current;
-    if (!shell || !track) return;
+    const outer = track ? track.parentElement : null;
+    if (!shell || !track || !outer) return;
 
-    let scrollHandler = null;
+    const mq = window.matchMedia("(max-width: 800px)");
+    let winHandler = null; // desktop: window scroll
+    let outHandler = null; // mobile: container scroll
+    let ticking = false;
 
-    function init() {
-      if (scrollHandler) {
-        window.removeEventListener("scroll", scrollHandler);
-        scrollHandler = null;
-      }
+    const clearDesktop = () => {
+      if (winHandler) { window.removeEventListener("scroll", winHandler); winHandler = null; }
       shell.style.height = "";
-      const outer = track.parentElement;
+      track.style.transform = "";
+      shell.classList.remove("static");
+    };
+    const clearMobile = () => {
+      if (outHandler) { outer.removeEventListener("scroll", outHandler); outHandler = null; }
+    };
+
+    const initDesktop = () => {
+      clearMobile();
+      shell.classList.remove("static");
+      shell.style.height = "";
+      track.style.transform = "";
       const scrollDist = track.scrollWidth - outer.offsetWidth;
-      if (scrollDist <= 0) return;
-      const vh = window.innerHeight;
-      shell.style.height = vh + scrollDist + "px";
-      scrollHandler = () => {
+      if (scrollDist <= 0) {
+        // Everything already fits → no hijack, and no empty 100vh band.
+        shell.classList.add("static");
+        if (fill) fill.style.width = "0%";
+        return;
+      }
+      shell.style.height = window.innerHeight + scrollDist + "px";
+      const apply = () => {
         const rect = shell.getBoundingClientRect();
         const prog = Math.min(1, Math.max(0, -rect.top / scrollDist));
-        track.style.transform = "translateX(" + -prog * scrollDist + "px)";
+        track.style.transform = "translate3d(" + (-prog * scrollDist) + "px,0,0)";
         if (fill) fill.style.width = prog * 100 + "%";
+        ticking = false;
       };
-      window.addEventListener("scroll", scrollHandler, { passive: true });
-      scrollHandler();
-    }
+      winHandler = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+      };
+      window.addEventListener("scroll", winHandler, { passive: true });
+      apply();
+    };
+
+    const initMobile = () => {
+      clearDesktop(); // drop any desktop height/transform left over
+      const apply = () => {
+        const max = outer.scrollWidth - outer.clientWidth;
+        const prog = max > 0 ? outer.scrollLeft / max : 0;
+        if (fill) fill.style.width = prog * 100 + "%";
+        ticking = false;
+      };
+      outHandler = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+      };
+      outer.addEventListener("scroll", outHandler, { passive: true });
+      apply();
+    };
+
+    const init = () => { (mq.matches ? initMobile : initDesktop)(); };
 
     const onResize = () => { setTimeout(init, 100); };
-
     init();
     window.addEventListener("resize", onResize);
+    if (mq.addEventListener) mq.addEventListener("change", init);
+    else if (mq.addListener) mq.addListener(init);
+
     return () => {
       window.removeEventListener("resize", onResize);
-      if (scrollHandler) window.removeEventListener("scroll", scrollHandler);
+      if (mq.removeEventListener) mq.removeEventListener("change", init);
+      else if (mq.removeListener) mq.removeListener(init);
+      clearDesktop();
+      clearMobile();
     };
   }, []);
 
@@ -488,6 +537,7 @@ export default function App() {
         width: "100%",
         height: "100%",
         objectFit: "cover",
+        objectPosition: "center top",
         zIndex: 0,
       }}
     />
@@ -555,7 +605,7 @@ export default function App() {
             </div>
             <div className="career-prog-row">
               <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>
-              <span className="career-drag">Scroll to travel the journey</span>
+              <span className="career-drag">Swipe or scroll to travel the journey</span>
             </div>
           </div>
         </div>
