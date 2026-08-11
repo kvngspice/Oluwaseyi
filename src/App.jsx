@@ -573,7 +573,7 @@ export default function App() {
 
             <div className="b-cell b-5 b-bone reveal d2">
               <p className="b-bio">
-                Oluwaseyi is a <strong>Senior Strategic Advisor</strong> to high-profile leaders, trusted to drive initiative to execution . She's the  person principals trust when the stakes are high, the problems are complex, and results cannot be left to chance.
+                Oluwaseyi is a <strong> Strategic Advisor</strong> to high-profile leaders, trusted to drive initiative to execution . She's the  person high performing leader trust when the stakes are high, the problems are complex, and results cannot be left to chance.
 
 Her work sits at the intersection of sound judgement, foresight, discretion and relentless execution. It requires knowing what needs attention, what needs protection, what needs to be said, and sometimes, what must remain confidential. Her career spans four countries and three continents, with experience across organizations including <strong> Google, Amazon, the Royal Bank of Canada, the Canadian Armed Forces, Diageo, Globacom, ActionAid, among others.</strong> She is the founder of <strong>Dome</strong>, a proptech startup transforming the rental experience through technology.
               </p>
