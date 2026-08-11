@@ -536,7 +536,7 @@ export default function App() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <span className="about-eyebrow reveal">About</span>
           <h2 className="about-headline reveal d1">
-            The quiet force behind <br /> <em>operational excellence.</em>
+            The quiet force behind driving big visions through  <em>relentless execution.</em>
           </h2>
           <div className="bento">
            <div className="b-cell b-1 reveal reveal-l">
@@ -606,7 +606,7 @@ export default function App() {
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Early</div><div className="cn-role">Marketing Foundations</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Built the fundamentals that would travel: consumer insight, brand narrative, campaign execution. The room where the instinct was first named.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Rise</div><div className="cn-role">Senior Account Manager</div><div className="cn-place">Marketing Agency</div><div className="cn-desc">Rose to senior leadership managing complex clients and large-scale campaigns delivering results under pressure, with eagle eye execution.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">International Chapter</div><div className="cn-place">Toronto · Canada</div><div className="cn-desc">Built a life and career on a new continent . She expanded her experience, her world and her understanding of operating across cultures.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">  General Manger </div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader and thought leader to run operations, protect his time and execute his vision. Discreet, precise and results-first.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">  General Manger </div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader to lead operations in a complex organizational structure, protect his time and execute his vision.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Build</div><div className="cn-role">Co-Founder, Dome</div><div className="cn-place">Lagos · Nigeria</div><div className="cn-desc">Building the trust layer Nigerian property has always lacked honest reviews before you commit your money. </div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Today</div><div className="cn-role">Creator &amp; Community Builder</div><div className="cn-place">@mommychoplife</div><div className="cn-desc">The Japada series documenting the return from Canada to Lagos in real time, building a community of people who share the same sentiment and also people interesting in built a functional life across boarders.</div></div>
               </div>
