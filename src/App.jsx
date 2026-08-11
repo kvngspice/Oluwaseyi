@@ -258,7 +258,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
                    then set this to "/hero.mp4"
    Leave it "" to keep the gradient fallback.
    ============================================================ */
-const HERO_VIDEO = "";
+const HERO_VIDEO = "/hero.mp4";
 
 export default function App() {
   const [stuck, setStuck] = useState(false);
@@ -500,21 +500,21 @@ export default function App() {
       <div className="ticker-bar" aria-hidden="true">
         <div className="ticker-track">
           <span className="ticker-item">Chief of Staff <span className="sep"></span></span>
-          <span className="ticker-item">Solutions Partner <span className="sep"></span></span>
-          <span className="ticker-item">Founder · Dome <span className="sep"></span></span>
+          <span className="ticker-item">Strategic advisor <span className="sep"></span></span>
+          <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
-          <span className="ticker-item">Soft Life, Sharp Mind <span className="sep"></span></span>
+          <span className="ticker-item"> Community builder/leader<span className="sep"></span></span>
           <span className="ticker-item">Lagos · Nigeria <span className="sep"></span></span>
-          <span className="ticker-item">Ease is Engineered <span className="sep"></span></span>
+          <span className="ticker-item"> Thorough execution <span className="sep"></span></span>
           <span className="ticker-item">Chief of Staff <span className="sep"></span></span>
           <span className="ticker-item">Solutions Partner <span className="sep"></span></span>
-          <span className="ticker-item">Founder · Dome <span className="sep"></span></span>
+          <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
-          <span className="ticker-item">Soft Life, Sharp Mind <span className="sep"></span></span>
+          <span className="ticker-item">Growth Consultant <span className="sep"></span></span>
           <span className="ticker-item">Lagos · Nigeria <span className="sep"></span></span>
-          <span className="ticker-item">Ease is Engineered <span className="sep"></span></span>
+         
         </div>
       </div>
 
@@ -523,7 +523,7 @@ export default function App() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <span className="about-eyebrow reveal">About</span>
           <h2 className="about-headline reveal d1">
-            The operator<br />behind the <em>soft life.</em>
+            The quiet force behind <br /> <em>seamless execution.</em>
           </h2>
           <div className="bento">
            <div className="b-cell b-1 reveal reveal-l">
@@ -542,14 +542,15 @@ export default function App() {
       }}
     />
     <p className="photo-lbl">
-      Order, taste<br />and results<span style={{ color: "var(--rose)" }}>.</span>
+      Order, sound judgement<br />and results<span style={{ color: "var(--rose)" }}>.</span>
     </p>
   </div>
 </div>
 
             <div className="b-cell b-2 b-ink b-quote reveal d1">
               <blockquote>
-                "Ease is engineered. The soft life you admire is someone's excellent systems, working quietly in the background."
+                "My job is to make difficult things look easy  through smart systems, sharp attention to detail, sound judgement and relentless execution.
+"
               </blockquote>
               <cite>Oluwaseyi Makinde</cite>
             </div>
@@ -557,7 +558,7 @@ export default function App() {
             <div className="b-cell b-3 b-rose-lt b-roles reveal d2">
               <div className="b-role-tag rt1">Chief of Staff</div>
               <div className="b-role-tag rt2">Strategic Advisor</div>
-              <div className="b-role-tag rt1">Founder · Dome</div>
+              <div className="b-role-tag rt1">Co-Founder · Dome</div>
               <div className="b-role-tag rt2">Creator · @mommychoplife</div>
               <div className="b-role-tag rt3">Japada Series</div>
             </div>
@@ -565,13 +566,16 @@ export default function App() {
             <div className="b-cell b-4 b-plum b-stat reveal d1">
               <div className="sn">
                 CA<span style={{ fontSize: ".45em", verticalAlign: "middle" }}>→</span>NG
+                 NG<span style={{ fontSize: ".45em", verticalAlign: "middle" }}>→</span>CA
               </div>
-              <div className="sl">The journey she's documenting in real time</div>
+              <div className="sl">The journey she's documenting in real time via Japada dairies</div>
             </div>
 
             <div className="b-cell b-5 b-bone reveal d2">
               <p className="b-bio">
-                Oluwaseyi is a <strong>Chief of Staff and Senior strategic Advisor</strong> to high-performing leaders. She is the go to person when high performing leaders need structure and results. Marketer by training. Founder of <strong>Dome</strong>. Creator behind <strong>@mommychoplife</strong> and the growing Japada series.
+                Oluwaseyi is a <strong>Senior Strategic Advisor</strong> to high-profile leaders, trusted to drive initiative to execution . She's the  person principals trust when the stakes are high, the problems are complex, and results cannot be left to chance.
+
+Her work sits at the intersection of sound judgement, foresight, discretion and relentless execution. It requires knowing what needs attention, what needs protection, what needs to be said, and sometimes, what must remain confidential. Her career spans four countries and three continents, with experience across organizations including <strong> Google, Amazon, the Royal Bank of Canada, the Canadian Armed Forces, Diageo, Globacom, ActionAid, among others.</strong> She is the founder of <strong>Dome</strong>, a proptech startup transforming the rental experience through technology.
               </p>
             </div>
           </div>
@@ -587,26 +591,26 @@ export default function App() {
             <em>One standard.</em>
           </h2>
           <p className="c-sub">
-            Every chapter carries the same instinct: walk into complexity and leave behind order, taste and results.
+            Oluwayseyi leaves a mark in every chapter.  
           </p>
         </div>
-
+<div className="career-prog-row">
+              <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>
+              <span className="career-drag">Swipe or scroll to travel the journey</span>
+            </div>
         <div className="career-shell" id="career-shell" ref={shellRef}>
           <div className="career-sticky" id="career-sticky">
             <div className="career-track-outer">
               <div className="career-track" id="career-track" ref={trackRef}>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Early</div><div className="cn-role">Marketing Foundations</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Built the fundamentals that would travel: consumer insight, brand narrative, campaign execution. The room where the instinct was first named.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Rise</div><div className="cn-role">Senior Account Manager</div><div className="cn-place">Marketing Agency</div><div className="cn-desc">Rose to senior leadership managing complex clients and large-scale campaigns delivering results under pressure, with taste.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Rise</div><div className="cn-role">Senior Account Manager</div><div className="cn-place">Marketing Agency</div><div className="cn-desc">Rose to senior leadership managing complex clients and large-scale campaigns delivering results under pressure, with eagle eye execution.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">International Chapter</div><div className="cn-place">Toronto · Canada</div><div className="cn-desc">Built a life and career on a new continent . She expanded her experience, her world and her understanding of operating across cultures.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">Chief of Staff &amp; GM</div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader and thought leader to run operations, protect his time and execute his vision. Discreet, precise and results-first.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Build</div><div className="cn-role">Founder, Dome</div><div className="cn-place">Lagos · Nigeria</div><div className="cn-desc">Building the trust layer Nigerian property has always lacked honest reviews before you commit your money. The operator turned founder.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Build</div><div className="cn-role">Co-Founder, Dome</div><div className="cn-place">Lagos · Nigeria</div><div className="cn-desc">Building the trust layer Nigerian property has always lacked honest reviews before you commit your money. </div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Today</div><div className="cn-role">Creator &amp; Community Builder</div><div className="cn-place">@mommychoplife</div><div className="cn-desc">The Japada series documenting the return from Canada to Lagos in real time, building a community of people who share the same sentiment and also people interesting in built a functional life across boarders.</div></div>
               </div>
             </div>
-            <div className="career-prog-row">
-              <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>
-              <span className="career-drag">Swipe or scroll to travel the journey</span>
-            </div>
+            
           </div>
         </div>
       </section>
@@ -655,14 +659,111 @@ export default function App() {
           </div>
         </div>
       </section>
+{/* RECOMMENDATIONS */}
+<section className="recs" id="recommendations">
+  <style dangerouslySetInnerHTML={{ __html: `
+    .recs{background:var(--bone);padding:100px 48px;overflow:hidden}
+    .recs-inner{max-width:1200px;margin:0 auto}
+    .recs-head{margin-bottom:56px}
+    .recs-eyebrow{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--plum);display:block;margin-bottom:18px}
+    .recs-title{font-family:var(--serif);font-size:clamp(38px,6vw,70px);font-weight:800;line-height:.95;letter-spacing:-.025em;color:var(--ink)}
+    .recs-title em{font-style:italic;color:var(--plum)}
+    .recs-sub{font-size:16px;color:var(--ink-2);opacity:.7;margin-top:16px;max-width:52ch;line-height:1.6}
+    .recs-grid{columns:3;column-gap:20px}
+    .rec-card{break-inside:avoid;margin-bottom:20px;background:var(--white);border:1px solid rgba(142,66,87,.1);border-radius:16px;padding:30px 28px;transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s}
+    .rec-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px rgba(142,66,87,.13)}
+    .rec-stars{color:var(--champ);font-size:15px;letter-spacing:2px;margin-bottom:16px}
+    .rec-quote{font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+    .rec-quote::before{content:"“";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
+    .rec-quote::after{content:"”";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
+    .rec-who{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(142,66,87,.1)}
+    .rec-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:16px;color:var(--white);background:var(--plum);object-fit:cover}
+    .rec-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+    .rec-role{font-size:11.5px;color:var(--ink-2);opacity:.65;line-height:1.3;margin-top:2px}
+    @media(max-width:900px){.recs-grid{columns:2}}
+    @media(max-width:600px){.recs{padding:80px 24px}.recs-grid{columns:1}}
+  ` }} />
 
+  <div className="recs-inner">
+    <div className="recs-head reveal">
+      <span className="recs-eyebrow">Recommendations</span>
+      <h2 className="recs-title">In their <em>own words.</em></h2>
+      <p className="recs-sub">Leaders, counsel and colleagues across marketing, finance and tech — on what it's like to work with Seyi.</p>
+    </div>
+
+    <div className="recs-grid">
+
+      <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">No matter how tense a meeting turned out, you could rely on Seyi to make sure everyone left with a smile. I gained confidence and new skills working with her — and I was consistently impressed by how effortlessly she handled even the toughest clients. She earns my highest recommendation.</p>
+        <div className="rec-who">
+          <div className="rec-avatar">E</div>
+          <div>
+            <div className="rec-name">Emmanuel Mang Dickson-Dieke, CDMP</div>
+            <div className="rec-role">Performance Marketing Strategist @ Hey Digital</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">Seyi did an AMAZING job. I reached out in a panic while marketing an event — within 5 days she got me over 450 new leads. Not only is she a marketing guru, she's kind, personable and takes professionalism to a new level. I'll recommend her without any reservations.</p>
+        <div className="rec-who">
+          <div className="rec-avatar">E</div>
+          <div>
+            <div className="rec-name">Efe Ukala, Esq.</div>
+            <div className="rec-role">VP, Assistant General Counsel at JPMorgan</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">I've worked with Seyi in different capacities and on different projects — she is a brilliant and thorough professional. Always available to dissect any brief and provide the best approach to demonstrate value for money. I would not hesitate to recommend her to any organisation that values talent.</p>
+        <div className="rec-who">
+          <div className="rec-avatar">O</div>
+          <div>
+            <div className="rec-name">Odianosen Iseyare, ACIM</div>
+            <div className="rec-role">Marketing Leader · Growth &amp; Digital Strategy</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but about your personal and career growth. Highly brilliant at digital strategy and a brainbox of ideas — you can always count on her to deliver. She has my highest recommendations anytime.</p>
+        <div className="rec-who">
+          <div className="rec-avatar">P</div>
+          <div>
+            <div className="rec-name">Peace Itimi</div>
+            <div className="rec-role">Marketing, Media &amp; Startups · MBA, Imperial College London</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">Without exaggeration, Seyi is the most passionate, well-educated and accomplished person I've had the privilege of working with. Always reliable and professional — her drive to excel is matched only by her generosity of spirit. She'll be a great asset to any organisation she joins.</p>
+        <div className="rec-who">
+          <div className="rec-avatar">M</div>
+          <div>
+            <div className="rec-name">Marc Menard</div>
+            <div className="rec-role">Knowledge &amp; Support Advisor at Alterna Savings</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
       {/* PRESS */}
       <div className="press">
         <span className="press-label">As featured in &amp; recognised by</span>
         <div className="press-grid reveal">
           <div className="press-card"><p className="press-q">"When Japa Turns to Japada — a conversation about returning home with purpose and a plan."</p><span className="press-src">Gbemi and toolz O· OffAir Show</span></div>
-          <div className="press-card"><p className="press-q">"Being born and raised in Nigeria doesn't mean lack of expose"</p><span className="press-src">The Japada Pod</span></div>
-          <div className="press-card"><p className="press-q">"Not a chameleon — range. One woman, one throughline: order, taste and results."</p><span className="press-src">Umbrellab Ltd · Brand Studio</span></div>
+          <div className="press-card"><p className="press-q">"Being born and raised in Nigeria doesn't mean lack of exposure"</p><span className="press-src">The Japada Pod</span></div>
+          <div className="press-card"><p className="press-q">"
+She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The Japada Pod</span></div>
         </div>
       </div>
 
@@ -753,7 +854,7 @@ export default function App() {
           <li><a href="#japada">Japada</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <span className="footer-copy">© 2026 Oluwaseyi Makinde · Solutions, with taste.</span>
+        <span className="footer-copy">© 2026 Oluwaseyi Makinde </span>
       </footer>
     </>
   );
