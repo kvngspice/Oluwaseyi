@@ -480,15 +480,28 @@ export default function App() {
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
-          <span className="hero-name">
-            Oluwaseyi<br />Makinde<span className="dot">.</span>
-          </span>
+  <style dangerouslySetInnerHTML={{ __html: `
+    .hero-logo{
+      width:min(800px,80vw);
+      height:auto;
+      display:block;
+      margin:0 auto;
+      filter:drop-shadow(0 2px 40px rgba(230,183,189,.3)) drop-shadow(0 0 80px rgba(142,66,87,.5));
+      animation:nameIn 1.2s cubic-bezier(.22,.68,0,1) both;
+    }
+  ` }} />
 
-          <div className="hero-ctas">
-            <a href="#about" className="btn-rose-solid">Discover Oluwaseyi </a>
-            <a href="#contact" className="btn-outline-w">Work with me</a>
-          </div>
-        </div>
+  <img
+    className="hero-logo"
+    src="/logo.png"
+    alt="Oluwaseyi Makinde"
+  />
+
+  <div className="hero-ctas">
+    <a href="#about" className="btn-rose-solid">Discover Oluwaseyi</a>
+    <a href="#contact" className="btn-outline-w">Work with me</a>
+  </div>
+</div>
 
         <div className="hero-scroll-hint">
           <div className="scroll-line"></div>
@@ -499,7 +512,7 @@ export default function App() {
       {/* TICKER */}
       <div className="ticker-bar" aria-hidden="true">
         <div className="ticker-track">
-          <span className="ticker-item">Chief of Staff <span className="sep"></span></span>
+
           <span className="ticker-item">Strategic advisor <span className="sep"></span></span>
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
@@ -523,7 +536,7 @@ export default function App() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <span className="about-eyebrow reveal">About</span>
           <h2 className="about-headline reveal d1">
-            The quiet force behind <br /> <em>seamless execution.</em>
+            The quiet force behind <br /> <em>operational excellence.</em>
           </h2>
           <div className="bento">
            <div className="b-cell b-1 reveal reveal-l">
@@ -541,9 +554,7 @@ export default function App() {
         zIndex: 0,
       }}
     />
-    <p className="photo-lbl">
-      Order, sound judgement<br />and results<span style={{ color: "var(--rose)" }}>.</span>
-    </p>
+   
   </div>
 </div>
 
@@ -556,26 +567,16 @@ export default function App() {
             </div>
 
             <div className="b-cell b-3 b-rose-lt b-roles reveal d2">
-              <div className="b-role-tag rt1">Chief of Staff</div>
               <div className="b-role-tag rt2">Strategic Advisor</div>
               <div className="b-role-tag rt1">Co-Founder · Dome</div>
               <div className="b-role-tag rt2">Creator · @mommychoplife</div>
               <div className="b-role-tag rt3">Japada Series</div>
             </div>
 
-            <div className="b-cell b-4 b-plum b-stat reveal d1">
-              <div className="sn">
-                CA<span style={{ fontSize: ".45em", verticalAlign: "middle" }}>→</span>NG
-                 NG<span style={{ fontSize: ".45em", verticalAlign: "middle" }}>→</span>CA
-              </div>
-              <div className="sl">The journey she's documenting in real time via Japada dairies</div>
-            </div>
-
-            <div className="b-cell b-5 b-bone reveal d2">
+        
+            <div className="b-cell b-4 b-bone reveal d2">
               <p className="b-bio">
-                Oluwaseyi is a <strong> Strategic Advisor</strong> to high-profile leaders, trusted to drive initiative to execution . She's the  person high performing leader trust when the stakes are high, the problems are complex, and results cannot be left to chance.
-
-Her work sits at the intersection of sound judgement, foresight, discretion and relentless execution. It requires knowing what needs attention, what needs protection, what needs to be said, and sometimes, what must remain confidential. Her career spans four countries and three continents, with experience across organizations including <strong> Google, Amazon, the Royal Bank of Canada, the Canadian Armed Forces, Diageo, Globacom, ActionAid, among others.</strong> She is the founder of <strong>Dome</strong>, a proptech startup transforming the rental experience through technology.
+        Oluwaseyi Makinde is a <strong> strategic advisor</strong> to high-profile leaders, trusted to act on their behalf with sound judgment and discretion while shielding them from unnecessary distractions and operational burdens. Her career spans international governments, global brands and nonprofit organizations across four countries and three continents. She is the co-founder of Dome, a proptech startup, and creator of the ‘Japada Diaries’, which chronicles her relocation from Canada to Nigeria. She is the founder of <strong>Dome</strong>, a proptech startup transforming the rental experience through technology.
               </p>
             </div>
           </div>
@@ -587,8 +588,8 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
         <div className="career-head reveal">
           <span className="c-eyebrow">Career Trajectory</span>
           <h2 className="c-title">
-            Many rooms<span style={{ color: "var(--champ)" }}>.</span><br />
-            <em>One standard.</em>
+        A journey<br />
+            <em>of excellence.</em>
           </h2>
           <p className="c-sub">
             Oluwayseyi leaves a mark in every chapter.  
@@ -605,7 +606,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Early</div><div className="cn-role">Marketing Foundations</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Built the fundamentals that would travel: consumer insight, brand narrative, campaign execution. The room where the instinct was first named.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Rise</div><div className="cn-role">Senior Account Manager</div><div className="cn-place">Marketing Agency</div><div className="cn-desc">Rose to senior leadership managing complex clients and large-scale campaigns delivering results under pressure, with eagle eye execution.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">International Chapter</div><div className="cn-place">Toronto · Canada</div><div className="cn-desc">Built a life and career on a new continent . She expanded her experience, her world and her understanding of operating across cultures.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">Chief of Staff &amp; GM</div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader and thought leader to run operations, protect his time and execute his vision. Discreet, precise and results-first.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">  General Manger </div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader and thought leader to run operations, protect his time and execute his vision. Discreet, precise and results-first.</div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Build</div><div className="cn-role">Co-Founder, Dome</div><div className="cn-place">Lagos · Nigeria</div><div className="cn-desc">Building the trust layer Nigerian property has always lacked honest reviews before you commit your money. </div></div>
                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Today</div><div className="cn-role">Creator &amp; Community Builder</div><div className="cn-place">@mommychoplife</div><div className="cn-desc">The Japada series documenting the return from Canada to Lagos in real time, building a community of people who share the same sentiment and also people interesting in built a functional life across boarders.</div></div>
               </div>
@@ -621,7 +622,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
           <span className="sec-ey-plum reveal">What She Builds</span>
           <h2 className="sec-h reveal d1">Work &amp; ventures.</h2>
           <div className="builds-grid">
-            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name">Chief of Staff &amp; Strategic Adivisor</div><div className="bc-sub">Executive Operations · HNW Principals</div></div><div className="bc-body"><p>Oluwaseyi works with high-performing leaders , founders, faith leaders and executives to protect their time, build their systems and execute their vision. Discreet, reliable and results-oriented.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
+            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name"> Strategic Adivisor</div><div className="bc-sub">Strategic Advisor · High profile Leaders</div></div><div className="bc-body"><p>Oluwaseyi works with powerful leaders , founders, faith leaders and executives to protect their time, build their systems and execute their vision. Confidential, reliable and results-oriented.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">02.</div><div className="bc-name">Dome</div><div className="bc-sub">Property Review Startup · Nigeria</div></div><div className="bc-body"><p>Building the trust layer Nigerian property has always lacked  honest, independent reviews before you commit your money. Coming soon: join the waitlist.</p><a href="#contact" className="bc-link">Join the Dome waitlist</a></div></div>
             <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series and a growing community of ambitious women building the life they want on purpose, back home or wherever home is.</p><a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">04.</div><div className="bc-name">Speaking &amp; Media</div><div className="bc-sub">Keynote · Panels · Features</div></div><div className="bc-body"><p>Available for keynotes, panels and media features on the Japada movement, women in executive roles and building a personal brand with substance.</p><a href="#contact" className="bc-link">Book a speaking engagement</a></div></div>
@@ -635,7 +636,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
           <div className="reveal reveal-l">
             <span className="j-eyebrow">The Japada Series</span>
             <h2 className="j-title">
-              When everyone<br />was leaving,<br />she found <em>balance</em> <br/> at <em>home </em>.
+              When everyone<br />was leaving,<br />she found <em>balance</em> <br/> by coming <em>back </em>.
             </h2>
             <p className="j-body">
               The Japada series follows a real life implication of a Nigerian relocating from Canada to Lagos  in honest, unfiltered episodes. Real costs. Real trade-offs. Real joy.
@@ -688,7 +689,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
     <div className="recs-head reveal">
       <span className="recs-eyebrow">Recommendations</span>
       <h2 className="recs-title">In their <em>own words.</em></h2>
-      <p className="recs-sub">Leaders, counsel and colleagues across marketing, finance and tech — on what it's like to work with Seyi.</p>
+      <p className="recs-sub">Leaders, counsel and colleagues across marketing, finance and tech on what it's like to work with Seyi.</p>
     </div>
 
     <div className="recs-grid">
@@ -707,7 +708,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Seyi did an AMAZING job. I reached out in a panic while marketing an event — within 5 days she got me over 450 new leads. Not only is she a marketing guru, she's kind, personable and takes professionalism to a new level. I'll recommend her without any reservations.</p>
+        <p className="rec-quote">Seyi did an AMAZING job. I reached out in a panic while marketing an event within 5 days she got me over 450 new leads. Not only is she a marketing guru, she's kind, personable and takes professionalism to a new level. I'll recommend her without any reservations.</p>
         <div className="rec-who">
           <div className="rec-avatar">E</div>
           <div>
@@ -719,7 +720,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">I've worked with Seyi in different capacities and on different projects — she is a brilliant and thorough professional. Always available to dissect any brief and provide the best approach to demonstrate value for money. I would not hesitate to recommend her to any organisation that values talent.</p>
+        <p className="rec-quote">I've worked with Seyi in different capacities and on different projects  she is a brilliant and thorough professional. Always available to dissect any brief and provide the best approach to demonstrate value for money. I would not hesitate to recommend her to any organisation that values talent.</p>
         <div className="rec-who">
           <div className="rec-avatar">O</div>
           <div>
@@ -731,7 +732,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but about your personal and career growth. Highly brilliant at digital strategy and a brainbox of ideas — you can always count on her to deliver. She has my highest recommendations anytime.</p>
+        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but about your personal and career growth. Highly brilliant at digital strategy and a brainbox of ideas you can always count on her to deliver. She has my highest recommendations anytime.</p>
         <div className="rec-who">
           <div className="rec-avatar">P</div>
           <div>
@@ -743,7 +744,7 @@ Her work sits at the intersection of sound judgement, foresight, discretion and 
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Without exaggeration, Seyi is the most passionate, well-educated and accomplished person I've had the privilege of working with. Always reliable and professional — her drive to excel is matched only by her generosity of spirit. She'll be a great asset to any organisation she joins.</p>
+        <p className="rec-quote">Without exaggeration, Seyi is the most passionate, well-educated and accomplished person I've had the privilege of working with. Always reliable and professional  her drive to excel is matched only by her generosity of spirit. She'll be a great asset to any organisation she joins.</p>
         <div className="rec-who">
           <div className="rec-avatar">M</div>
           <div>
@@ -821,7 +822,7 @@ She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The
                 <label>I'm reaching out about</label>
                 <select defaultValue="">
                   <option value="" disabled>Select a reason</option>
-                  <option>Working with Oluwaseyi (Chief of Staff / Solutions)</option>
+                  <option>Working with Oluwaseyi (strategic Advisor )</option>
                   <option>Dome — property review startup</option>
                   <option>Speaking or media feature</option>
                   <option>Brand partnership or collaboration</option>
