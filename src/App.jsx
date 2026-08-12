@@ -560,15 +560,18 @@ export default function App() {
 
             <div className="b-cell b-2 b-ink b-quote reveal d1">
               <blockquote>
-                "My job is to make difficult things look easy  through smart systems, sharp attention to detail, sound judgement and relentless execution.
-"
+                "My job is to know what needs attention, what needs protection, what needs to be said, and what must remain confidential."
               </blockquote>
               <cite>Oluwaseyi Makinde</cite>
             </div>
 
             <div className="b-cell b-3 b-rose-lt b-roles reveal d2">
+  <style dangerouslySetInnerHTML={{ __html: `
+    .rt-ink{background:var(--ink);color:var(--rose-lt)}
+  ` }} />
               <div className="b-role-tag rt2">Strategic Advisor</div>
               <div className="b-role-tag rt1">Co-Founder · Dome</div>
+              <div className="b-role-tag rt-ink">Consultant</div>
               <div className="b-role-tag rt2">Creator · @mommychoplife</div>
               <div className="b-role-tag rt3">Japada Series</div>
             </div>
@@ -594,41 +597,51 @@ export default function App() {
             <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name"> Strategic Advisor</div><div className="bc-sub">Strategic Advisor · High profile Leaders</div></div><div className="bc-body"><p>Leaders rely on Oluwaseyi to anticipate and solve problems before they surface, protect their time, reputation and vision.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">02.</div><div className="bc-name">Dome</div><div className="bc-sub">PROPTECH STARTUP · Nigeria</div></div><div className="bc-body"><p>Dome gives you the real story before you rent, with verified reviews and neighbourhood insights that make finding your next home simpler and more transparent.</p><a href="https://usedome.app/" className="bc-link">Download the app</a></div></div>
             <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">@mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series chronicling her journey of relocating from Canada to Nigeria and sharing insights on building a meaningful life back home.</p><a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
-            <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">04.</div><div className="bc-name">Speaking &amp; Media</div><div className="bc-sub">Keynote · Panels · Features</div></div><div className="bc-body"><p>Available for keynotes, panels and media features on the Japada movement, women in executive roles and building a personal brand with substance.</p><a href="#contact" className="bc-link">Book a speaking engagement</a></div></div>
+            <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">04.</div><div className="bc-name">Speaking &amp; Media</div><div className="bc-sub">Keynote · Panels · Features</div></div><div className="bc-body"><p>Available for keynotes, panels and media features on the Japada movement, women in executive leadership and building strong, intentional personal brands.</p><a href="#contact" className="bc-link">Book a speaking engagement</a></div></div>
           </div>
         </div>
       </section>
 
       {/* JAPADA */}
-      <section className="japada" id="japada">
-        <div className="japada-inner">
-          <div className="reveal reveal-l">
-            <span className="j-eyebrow">The Japada Series</span>
-            <h2 className="j-title">
-              When everyone<br />was leaving,<br />she found <em>balance</em> <br/> by coming <em>back </em>.
-            </h2>
-            <p className="j-body">
-              The Japada series follows a real life implication of a Nigerian relocating from Canada to Lagos  in honest, unfiltered episodes. Real costs. Real trade-offs. Real joy.
-            </p>
-            <div className="j-eps">
-              <div className="ep-row"><span className="ep-n">01</span><span className="ep-t">Why I came back when everyone was leaving</span><span className="ep-badge">Ep. 1</span></div>
-              <div className="ep-row"><span className="ep-n">02</span><span className="ep-t">The real cost of settling in Lagos — the numbers</span><span className="ep-badge">Ep. 2</span></div>
-              <div className="ep-row"><span className="ep-n">03</span><span className="ep-t">Raising my kids here vs. there</span><span className="ep-badge">Ep. 3</span></div>
-              <div className="ep-row"><span className="ep-n">04</span><span className="ep-t">The artisan wahala nobody warns you about</span><span className="ep-badge">Ep. 4</span></div>
-              <div className="ep-row"><span className="ep-n">05</span><span className="ep-t">Multi-currency life: making it actually work</span><span className="ep-badge">Ep. 5</span></div>
-            </div>
-            <div className="j-ctas">
-              <a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="btn-bone">Watch the series</a>
-              <a href="#contact" className="btn-ghost-w">Get the Japada Playbook</a>
-            </div>
-          </div>
-          <div className="j-stats reveal d2">
-            <div className="jstat"><div className="jn">5<em>+</em></div><div className="jl">Episodes released and growing</div></div>
-            <div className="jstat"><div className="jn">CA<em>→</em>NG</div><div className="jl">The journey she's building in public</div></div>
-            <div className="jstat"><div className="jn">1<em> plan</em></div><div className="jl">Written down as she goes, for those planning the same move</div></div>
-          </div>
-        </div>
-      </section>
+     {/* JAPADA */}
+<section className="japada" id="japada">
+  <style dangerouslySetInnerHTML={{ __html: `
+    .japada-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+    .japada-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;
+      box-shadow:0 30px 60px rgba(36,27,29,.35)}
+    .japada-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+    .japada-photo::after{content:"";position:absolute;inset:0;
+      background:linear-gradient(160deg,rgba(230,183,189,0) 55%,rgba(142,66,87,.35) 100%)}
+    @media(max-width:820px){
+      .japada-inner{grid-template-columns:1fr;gap:40px}
+      .japada-photo{aspect-ratio:3/4;max-width:460px;margin:0 auto;order:2}
+    }
+  ` }} />
+
+  <div className="japada-inner">
+    <div className="reveal reveal-l">
+      <span className="j-eyebrow">The Japada Series</span>
+      <h2 className="j-title">
+        When everyone<br />was leaving,<br />she found <em>balance</em> <br/> by coming <em>back </em>.
+      </h2>
+     
+      <div className="j-eps">
+        <div className="ep-row"><span className="ep-n">01</span><span className="ep-t">Why I came back when everyone was leaving</span><span className="ep-badge">Ep. 1</span></div>
+        <div className="ep-row"><span className="ep-n">02</span><span className="ep-t">The real cost of settling in Lagos — the numbers</span><span className="ep-badge">Ep. 2</span></div>
+        <div className="ep-row"><span className="ep-n">03</span><span className="ep-t">Raising my kids here vs. there</span><span className="ep-badge">Ep. 3</span></div>
+        <div className="ep-row"><span className="ep-n">04</span><span className="ep-t">The artisan wahala nobody warns you about</span><span className="ep-badge">Ep. 4</span></div>
+        <div className="ep-row"><span className="ep-n">05</span><span className="ep-t">Multi-currency life: making it actually work</span><span className="ep-badge">Ep. 5</span></div>
+      </div>
+      <div className="j-ctas">
+        <a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="btn-bone">Watch the series</a>
+      </div>
+    </div>
+
+    <div className="japada-photo reveal d2">
+      <img src="/japada.jpg" alt="Oluwaseyi Makinde in Lagos" />
+    </div>
+  </div>
+</section>
 {/* RECOMMENDATIONS */}
 <section className="recs" id="recommendations">
   <style dangerouslySetInnerHTML={{ __html: `
@@ -658,14 +671,15 @@ export default function App() {
     <div className="recs-head reveal">
       <span className="recs-eyebrow">Recommendations</span>
       <h2 className="recs-title">In their <em>own words.</em></h2>
-      <p className="recs-sub">Leaders, counsel and colleagues across marketing, finance and tech on what it's like to work with Seyi.</p>
+      <p className="recs-sub">Principals, partners and peers across marketing, finance and tech on what it’s like to work with Oluwaseyi</p>
     </div>
 
     <div className="recs-grid">
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">No matter how tense a meeting turned out, you could rely on Seyi to make sure everyone left with a smile. I gained confidence and new skills working with her — and I was consistently impressed by how effortlessly she handled even the toughest clients. She earns my highest recommendation.</p>
+        <p className="rec-quote">I was particularly inspired as well as impressed by Seyi's ability to handle even the toughest clients effortlessly. A skill that often takes a very long time to master appeared to be natural to her..
+No matter how tense a meeting turned out, you could rely on Seyi to make sure everyone left with a smile. </p>
         <div className="rec-who">
           <div className="rec-avatar">E</div>
           <div>
@@ -677,7 +691,8 @@ export default function App() {
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Seyi did an AMAZING job. I reached out in a panic while marketing an event within 5 days she got me over 450 new leads. Not only is she a marketing guru, she's kind, personable and takes professionalism to a new level. I'll recommend her without any reservations.</p>
+        <p className="rec-quote">Not only is Seyi a marketing guru, she is
+also kind, personable, and very easy to work with. She takes professionalism to a new level. I really enjoyed working with her and already have other projects lined up for her. I absolutely enjoyed working with her and will recommend her to anyone without any reservations</p>
         <div className="rec-who">
           <div className="rec-avatar">E</div>
           <div>
@@ -701,7 +716,7 @@ export default function App() {
 
       <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but about your personal and career growth. Highly brilliant at digital strategy and a brainbox of ideas you can always count on her to deliver. She has my highest recommendations anytime.</p>
+        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but also about your personal and career growth. Seyi is highly brilliant at digital strategy and is a brainbox of ideas - you can always count on her to deliver. During my time working with Seyi, she really inspired me to pursue excellence. Seyi has my highest recommendations anytime.</p>
         <div className="rec-who">
           <div className="rec-avatar">P</div>
           <div>
@@ -816,7 +831,7 @@ She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The
 
       {/* FOOTER */}
       <footer className="footer">
-        <span className="footer-name">Oluwaseyi Makinde.</span>
+
         <ul className="footer-links">
           <li><a href="#about">About</a></li>
           <li><a href="#career">Journey</a></li>
