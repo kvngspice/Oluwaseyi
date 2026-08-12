@@ -536,7 +536,7 @@ export default function App() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <span className="about-eyebrow reveal">About</span>
           <h2 className="about-headline reveal d1">
-            The quiet force behind driving big visions through  <em>relentless execution.</em>
+            The quiet force driving big visions through  <em>relentless execution.</em>
           </h2>
           <div className="bento">
            <div className="b-cell b-1 reveal reveal-l">
@@ -576,45 +576,14 @@ export default function App() {
         
             <div className="b-cell b-4 b-bone reveal d2">
               <p className="b-bio">
-        Oluwaseyi Makinde is a <strong> strategic advisor</strong> to high-profile leaders, trusted to act on their behalf with sound judgment and discretion while shielding them from unnecessary distractions and operational burdens. Her career spans international governments, global brands and nonprofit organizations across four countries and three continents. She is the co-founder of Dome, a proptech startup, and creator of the ‘Japada Diaries’, which chronicles her relocation from Canada to Nigeria. She is the founder of <strong>Dome</strong>, a proptech startup transforming the rental experience through technology.
+        Oluwaseyi Makinde is a <strong> strategic advisor</strong> to high-profile leaders, trusted to act on their behalf with sound judgment and discretion while shielding them from unnecessary distractions and operational burdens. Her career spans international governments, global brands and nonprofit organizations across four countries and three continents. 
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CAREER */}
-      <section className="career" id="career">
-        <div className="career-head reveal">
-          <span className="c-eyebrow">Career Trajectory</span>
-          <h2 className="c-title">
-        A journey<br />
-            <em>of excellence.</em>
-          </h2>
-          <p className="c-sub">
-            Oluwayseyi leaves a mark in every chapter.  
-          </p>
-        </div>
-<div className="career-prog-row">
-              <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>
-              <span className="career-drag">Swipe or scroll to travel the journey</span>
-            </div>
-        <div className="career-shell" id="career-shell" ref={shellRef}>
-          <div className="career-sticky" id="career-sticky">
-            <div className="career-track-outer">
-              <div className="career-track" id="career-track" ref={trackRef}>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Early</div><div className="cn-role">Marketing Foundations</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Built the fundamentals that would travel: consumer insight, brand narrative, campaign execution. The room where the instinct was first named.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Rise</div><div className="cn-role">Senior Account Manager</div><div className="cn-place">Marketing Agency</div><div className="cn-desc">Rose to senior leadership managing complex clients and large-scale campaigns delivering results under pressure, with eagle eye execution.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">International Chapter</div><div className="cn-place">Toronto · Canada</div><div className="cn-desc">Built a life and career on a new continent . She expanded her experience, her world and her understanding of operating across cultures.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Now</div><div className="cn-role">  General Manger </div><div className="cn-place">Faith Leader's Office · Lagos</div><div className="cn-desc">Trusted by a high-profile faith leader to lead operations in a complex organizational structure, protect his time and execute his vision.</div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Build</div><div className="cn-role">Co-Founder, Dome</div><div className="cn-place">Lagos · Nigeria</div><div className="cn-desc">Building the trust layer Nigerian property has always lacked honest reviews before you commit your money. </div></div>
-                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Today</div><div className="cn-role">Creator &amp; Community Builder</div><div className="cn-place">@mommychoplife</div><div className="cn-desc">The Japada series documenting the return from Canada to Lagos in real time, building a community of people who share the same sentiment and also people interesting in built a functional life across boarders.</div></div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </section>
+     
 
       {/* BUILDS */}
       <section className="builds" id="builds">
@@ -622,9 +591,9 @@ export default function App() {
           <span className="sec-ey-plum reveal">What She Builds</span>
           <h2 className="sec-h reveal d1">Work &amp; ventures.</h2>
           <div className="builds-grid">
-            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name"> Strategic Adivisor</div><div className="bc-sub">Strategic Advisor · High profile Leaders</div></div><div className="bc-body"><p>Oluwaseyi works with powerful leaders , founders, faith leaders and executives to protect their time, build their systems and execute their vision. Confidential, reliable and results-oriented.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
-            <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">02.</div><div className="bc-name">Dome</div><div className="bc-sub">Property Review Startup · Nigeria</div></div><div className="bc-body"><p>Building the trust layer Nigerian property has always lacked  honest, independent reviews before you commit your money. Coming soon: join the waitlist.</p><a href="#contact" className="bc-link">Join the Dome waitlist</a></div></div>
-            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series and a growing community of ambitious women building the life they want on purpose, back home or wherever home is.</p><a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
+            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name"> Strategic Advisor</div><div className="bc-sub">Strategic Advisor · High profile Leaders</div></div><div className="bc-body"><p>Leaders rely on Oluwaseyi to anticipate and solve problems before they surface, protect their time, reputation and vision.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
+            <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">02.</div><div className="bc-name">Dome</div><div className="bc-sub">PROPTECH STARTUP Startup · Nigeria</div></div><div className="bc-body"><p>Dome gives you the real story before you rent, with verified reviews and neighbourhood insights that make finding your next home simpler and more transparent.</p><a href="https://usedome.app/" className="bc-link">Download the app</a></div></div>
+            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">@mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series chronicling her journey of relocating from Canada to Nigeria and sharing insights on building a meaningful life back home.</p><a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">04.</div><div className="bc-name">Speaking &amp; Media</div><div className="bc-sub">Keynote · Panels · Features</div></div><div className="bc-body"><p>Available for keynotes, panels and media features on the Japada movement, women in executive roles and building a personal brand with substance.</p><a href="#contact" className="bc-link">Book a speaking engagement</a></div></div>
           </div>
         </div>
