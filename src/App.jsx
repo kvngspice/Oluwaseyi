@@ -739,7 +739,7 @@ also kind, personable, and very easy to work with. She takes professionalism to 
       </div>
    <div className="rec-card reveal">
         <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Oluwaseyi is results-driven, and it shows in the way she works. She has a unique ability to recognise people’s strengths, position them where they can thrive, and bring out their best to achieve exceptional results. She a true gem. </p>
+        <p className="rec-quote">Oluwaseyi is results-driven, and it shows in the way she works. She has a unique ability to recognise people’s strengths, position them where they can thrive, and bring out their best to achieve exceptional results. She is a true gem. </p>
         <div className="rec-who">
           <div className="rec-avatar">E</div>
           <div>
