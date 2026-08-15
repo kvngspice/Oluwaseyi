@@ -521,7 +521,7 @@ export default function App() {
         
          
     
-          <span className="ticker-item">Solutions Partner <span className="sep"></span></span>
+          
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
