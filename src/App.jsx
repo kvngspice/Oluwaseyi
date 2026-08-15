@@ -517,16 +517,15 @@ export default function App() {
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
-          <span className="ticker-item"> Community builder/leader<span className="sep"></span></span>
-          <span className="ticker-item">Lagos · Nigeria <span className="sep"></span></span>
-          <span className="ticker-item"> Thorough execution <span className="sep"></span></span>
-          <span className="ticker-item">Chief of Staff <span className="sep"></span></span>
+    
+        
+         
+    
           <span className="ticker-item">Solutions Partner <span className="sep"></span></span>
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
           <span className="ticker-item">Growth Consultant <span className="sep"></span></span>
-          <span className="ticker-item">Lagos · Nigeria <span className="sep"></span></span>
          
         </div>
       </div>
@@ -560,7 +559,7 @@ export default function App() {
 
             <div className="b-cell b-2 b-ink b-quote reveal d1">
               <blockquote>
-                "My job is to know what needs attention, what needs protection, what needs to be said, and what must remain confidential."
+                "My job is to know what needs attention, what needs protection, what needs to be said and what must remain confidential."
               </blockquote>
               <cite>Oluwaseyi Makinde</cite>
             </div>
