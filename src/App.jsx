@@ -429,7 +429,7 @@ export default function App() {
       {/* NAV */}
       <nav className={`nav${stuck ? " stuck" : ""}`} id="nav">
         <span className="nav-name">
-          Oluwaseyi <b>Makinde</b>
+           <b></b>
         </span>
         <div className={`nav-links-wrap${menuOpen ? " open" : ""}`} id="nav-links-wrap">
           <ul className="nav-links">
@@ -536,7 +536,7 @@ export default function App() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <span className="about-eyebrow reveal">About</span>
           <h2 className="about-headline reveal d1">
-            The quiet force driving big visions through  <em>relentless execution.</em>
+            The quiet force <em> driving big visions through</em>  relentless execution.
           </h2>
           <div className="bento">
            <div className="b-cell b-1 reveal reveal-l">
@@ -737,7 +737,17 @@ also kind, personable, and very easy to work with. She takes professionalism to 
           </div>
         </div>
       </div>
-
+   <div className="rec-card reveal">
+        <div className="rec-stars">★★★★★</div>
+        <p className="rec-quote">Oluwaseyi is results-driven, and it shows in the way she works. She has a unique ability to recognise people’s strengths, position them where they can thrive, and bring out their best to achieve exceptional results. She a true gem. </p>
+        <div className="rec-who">
+          <div className="rec-avatar">E</div>
+          <div>
+            <div className="rec-name">Samson Adebayo</div>
+            <div className="rec-role">Chief Creative director, Umbrellab</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -830,17 +840,24 @@ She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
+     <footer className="footer">
+  <style dangerouslySetInnerHTML={{ __html: `
+    .footer-logo{height:66px;width:auto;display:block;flex-shrink:0}
+  ` }} />
 
-        <ul className="footer-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#career">Journey</a></li>
-          <li><a href="#builds">Work</a></li>
-          <li><a href="#japada">Japada</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <span className="footer-copy">© 2026 Oluwaseyi Makinde </span>
-      </footer>
+  <a href="#home" aria-label="Oluwaseyi Makinde — home">
+    <img className="footer-logo" src="/logo.png" alt="Oluwaseyi Makinde" />
+  </a>
+
+  <ul className="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#career">Journey</a></li>
+    <li><a href="#builds">Work</a></li>
+    <li><a href="#japada">Japada</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span className="footer-copy">© 2026 Oluwaseyi Makinde</span>
+</footer>
     </>
   );
 }
