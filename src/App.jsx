@@ -14,8 +14,9 @@ const CSS = `
   --sans:"Hanken Grotesk",system-ui,sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--sans);background:var(--rose);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;display:block;min-height:100vh}
+/* overflow-x:clip (not hidden) so position:sticky keeps working for the career scroller */
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
+body{font-family:var(--sans);background:var(--rose);color:var(--ink);overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;display:block;min-height:100vh}
 #root{width:100%;max-width:none;min-height:100vh;margin:0;padding:0;text-align:left}
 a{text-decoration:none;color:inherit}
 img,video{display:block;max-width:100%}
@@ -119,14 +120,15 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .career-shell.static .career-sticky{position:static;height:auto;justify-content:flex-start;padding-bottom:20px}
 .career-track-outer{overflow:hidden}
 .career-track{display:flex;padding:0 48px;will-change:transform}
-.career-node{flex:0 0 360px;padding-right:48px}
+/* Wide nodes so the 5 stops always overflow the screen and the track always travels sideways */
+.career-node{flex:0 0 clamp(340px,34vw,480px);padding-right:56px}
 .cn-line{height:1px;background:linear-gradient(to right,var(--rose),transparent);margin-bottom:30px;position:relative}
 .cn-line::before{content:"";position:absolute;left:0;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 3px rgba(230,183,189,.2)}
 .cn-year{font-family:var(--serif);font-style:italic;font-size:50px;font-weight:300;line-height:1;color:var(--champ);margin-bottom:12px}
 .cn-role{font-family:var(--serif);font-weight:700;font-size:21px;color:var(--bone);margin-bottom:6px;line-height:1.2}
 .cn-place{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:12px}
 .cn-desc{font-size:14px;color:rgba(247,242,236,.52);line-height:1.65}
-.career-prog-row{padding:22px 48px 40px;display:flex;align-items:center;gap:16px}
+.career-prog-row{padding:40px 48px 0;display:flex;align-items:center;gap:16px}
 .career-prog-track{flex:1;height:1px;background:rgba(247,242,236,.08)}
 .career-prog-fill{height:100%;width:0;background:linear-gradient(to right,var(--rose),var(--champ));transition:width .08s linear}
 .career-drag{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,236,.22);white-space:nowrap}
@@ -260,6 +262,64 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
    ============================================================ */
 const HERO_VIDEO = "/hero.mp4";
 
+/* BROWSER TAB TITLE: change the text here */
+const SITE_TITLE = "Oluwaseyi Makinde | Strategic Advisor";
+
+/* BROWSER TAB ICON (favicon): drop the image into /public, then put its name here.
+   A square PNG (512×512) or an SVG works best. */
+const FAVICON = "/favicon.png";
+
+/* ============================================================
+   JAPADA SERIES · YOUTUBE (plays right on the page)
+   1. Paste the playlist link (or just its ID) into JAPADA_PLAYLIST, e.g.
+      "https://www.youtube.com/playlist?list=PLxxxxxxxxxxxx"
+   2. Optional: paste each episode's own video link into its `url`
+      so clicking that episode opens exactly that video.
+      (Without it, episode 3 plays the 3rd video in the playlist.)
+   ============================================================ */
+const JAPADA_PLAYLIST = "https://www.youtube.com/playlist?list=PL8yjl99RbM6XSDL8c846zsd4rslmWY7Kz";
+const INSTAGRAM = "https://www.instagram.com/mommychoplife/";
+
+const JAPADA_EPISODES = [
+  { title: "Why I came back when everyone was leaving", url: "" },
+  { title: "The real cost of settling in Lagos: the numbers", url: "" },
+  { title: "Raising my kids here vs. there", url: "" },
+  { title: "The artisan wahala nobody warns you about", url: "" },
+  { title: "Multi-currency life: making it actually work", url: "" },
+];
+
+/* YouTube helpers: accept full links or bare IDs */
+const ytListId = (s = "") => {
+  const m = s.match(/[?&]list=([\w-]+)/);
+  if (m) return m[1];
+  const t = s.trim();
+  return /^[\w-]{12,}$/.test(t) ? t : "";
+};
+const ytVideoId = (s = "") => {
+  const m = s.match(/(?:[?&]v=|youtu\.be\/|embed\/|shorts\/|live\/)([\w-]{11})/);
+  if (m) return m[1];
+  const t = s.trim();
+  return /^[\w-]{11}$/.test(t) ? t : "";
+};
+const LIST_ID = ytListId(JAPADA_PLAYLIST);
+
+/* FEATURED VIDEO in the Japada section (paste any YouTube link) */
+const FEATURED_VIDEO = {
+  url: "https://www.youtube.com/watch?v=tRf9JVDMWA8",
+  label: "As featured on BBC News Africa",
+  title: "Is life abroad worth the move?",
+};
+const FEATURED_ID = ytVideoId(FEATURED_VIDEO.url);
+const PLAYLIST_URL = LIST_ID ? `https://www.youtube.com/playlist?list=${LIST_ID}` : "";
+const ytEmbed = (i) => {
+  const base = "https://www.youtube.com/embed/";
+  const params = "autoplay=1&rel=0&modestbranding=1&playsinline=1";
+  const vid = i != null ? ytVideoId(JAPADA_EPISODES[i]?.url) : "";
+  if (vid) return `${base}${vid}?${params}${LIST_ID ? `&list=${LIST_ID}` : ""}`;
+  if (LIST_ID) return `${base}videoseries?list=${LIST_ID}&${params}${i != null ? `&index=${i}` : ""}`;
+  return "";
+};
+
 export default function App() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -270,6 +330,26 @@ export default function App() {
   const shellRef = useRef(null);
   const trackRef = useRef(null);
   const fillRef = useRef(null);
+
+  /* Japada YouTube player */
+  const [ytSrc, setYtSrc] = useState("");
+  const [activeEp, setActiveEp] = useState(null);
+  const playerRef = useRef(null);
+  const [featOn, setFeatOn] = useState(false);
+
+  /* Browser tab title */
+  useEffect(() => {
+    document.title = SITE_TITLE;
+    if (FAVICON) {
+      // Replace any existing tab icon (e.g. Vite's default) with ours
+      document.querySelectorAll("link[rel~='icon']").forEach((l) => l.remove());
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = FAVICON.endsWith(".svg") ? "image/svg+xml" : "image/png";
+      link.href = FAVICON;
+      document.head.appendChild(link);
+    }
+  }, []);
 
   /* Inject Google Fonts (originally in <head>) */
   useEffect(() => {
@@ -330,7 +410,7 @@ export default function App() {
     return () => rio.disconnect();
   }, []);
 
-  /* CAREER — desktop: scroll-driven horizontal (rAF-smoothed).
+  /* CAREER — desktop: vertical scroll drives the track sideways (rAF-smoothed).
      mobile: native touch side-scroll. Progress bar tracks both. */
   useEffect(() => {
     const shell = shellRef.current;
@@ -356,16 +436,17 @@ export default function App() {
 
     const initDesktop = () => {
       clearMobile();
+      if (winHandler) { window.removeEventListener("scroll", winHandler); winHandler = null; }
       shell.classList.remove("static");
       shell.style.height = "";
       track.style.transform = "";
       const scrollDist = track.scrollWidth - outer.offsetWidth;
       if (scrollDist <= 0) {
-        // Everything already fits → no hijack, and no empty 100vh band.
         shell.classList.add("static");
         if (fill) fill.style.width = "0%";
         return;
       }
+      // Pin the panel for exactly as long as it takes to slide the whole track across
       shell.style.height = window.innerHeight + scrollDist + "px";
       const apply = () => {
         const rect = shell.getBoundingClientRect();
@@ -382,7 +463,8 @@ export default function App() {
     };
 
     const initMobile = () => {
-      clearDesktop(); // drop any desktop height/transform left over
+      clearDesktop();
+      clearMobile();
       const apply = () => {
         const max = outer.scrollWidth - outer.clientWidth;
         const prog = max > 0 ? outer.scrollLeft / max : 0;
@@ -398,13 +480,17 @@ export default function App() {
 
     const init = () => { (mq.matches ? initMobile : initDesktop)(); };
 
-    const onResize = () => { setTimeout(init, 100); };
+    let resizeT = null;
+    const onResize = () => { clearTimeout(resizeT); resizeT = setTimeout(init, 100); };
     init();
+    // Re-measure once web fonts land (text width can shift the track)
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(init);
     window.addEventListener("resize", onResize);
     if (mq.addEventListener) mq.addEventListener("change", init);
     else if (mq.addListener) mq.addListener(init);
 
     return () => {
+      clearTimeout(resizeT);
       window.removeEventListener("resize", onResize);
       if (mq.removeEventListener) mq.removeEventListener("change", init);
       else if (mq.removeListener) mq.removeListener(init);
@@ -421,6 +507,28 @@ export default function App() {
   };
 
   const closeMenu = () => setMenuOpen(false);
+
+  const seriesHref = PLAYLIST_URL || INSTAGRAM;
+
+  /* Load an episode (or the whole series) into the on-page player */
+  const playEpisode = (i) => {
+    let idx = i;
+    if (idx == null && !LIST_ID) {
+      const first = JAPADA_EPISODES.findIndex((e) => ytVideoId(e.url));
+      idx = first >= 0 ? first : null;
+    }
+    const src = ytEmbed(idx);
+    if (!src) {
+      // No YouTube link added yet: fall back to Instagram
+      window.open(INSTAGRAM, "_blank", "noopener");
+      return;
+    }
+    setActiveEp(idx);
+    setYtSrc(src);
+    if (window.matchMedia("(max-width: 820px)").matches && playerRef.current) {
+      playerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
     <>
@@ -480,28 +588,28 @@ export default function App() {
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
-  <style dangerouslySetInnerHTML={{ __html: `
-    .hero-logo{
-      width:min(800px,80vw);
-      height:auto;
-      display:block;
-      margin:0 auto;
-      filter:drop-shadow(0 2px 40px rgba(230,183,189,.3)) drop-shadow(0 0 80px rgba(142,66,87,.5));
-      animation:nameIn 1.2s cubic-bezier(.22,.68,0,1) both;
-    }
-  ` }} />
+          <style dangerouslySetInnerHTML={{ __html: `
+            .hero-logo{
+              width:min(800px,80vw);
+              height:auto;
+              display:block;
+              margin:0 auto;
+              filter:drop-shadow(0 2px 40px rgba(230,183,189,.3)) drop-shadow(0 0 80px rgba(142,66,87,.5));
+              animation:nameIn 1.2s cubic-bezier(.22,.68,0,1) both;
+            }
+          ` }} />
 
-  <img
-    className="hero-logo"
-    src="/logo.png"
-    alt="Oluwaseyi Makinde"
-  />
+          <img
+            className="hero-logo"
+            src="/logo.png"
+            alt="Oluwaseyi Makinde"
+          />
 
-  <div className="hero-ctas">
-    <a href="#about" className="btn-rose-solid">Discover Oluwaseyi</a>
-    <a href="#contact" className="btn-outline-w">Work with me</a>
-  </div>
-</div>
+          <div className="hero-ctas">
+            <a href="#about" className="btn-rose-solid">Discover Oluwaseyi</a>
+            <a href="#contact" className="btn-outline-w">Work with me</a>
+          </div>
+        </div>
 
         <div className="hero-scroll-hint">
           <div className="scroll-line"></div>
@@ -512,23 +620,15 @@ export default function App() {
       {/* TICKER */}
       <div className="ticker-bar" aria-hidden="true">
         <div className="ticker-track">
-
           <span className="ticker-item">Strategic advisor <span className="sep"></span></span>
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
-    
-        
-         
-    
-          
           <span className="ticker-item">Co-Founder · Dome <span className="sep"></span></span>
           <span className="ticker-item">@mommychoplife <span className="sep"></span></span>
           <span className="ticker-item">The Japada Series <span className="sep"></span></span>
           <span className="ticker-item">Growth Consultant <span className="sep"></span></span>
-         
         </div>
-        
       </div>
 
       {/* ABOUT */}
@@ -539,24 +639,23 @@ export default function App() {
             The quiet force <em> driving big visions through</em>  relentless execution.
           </h2>
           <div className="bento">
-           <div className="b-cell b-1 reveal reveal-l">
-  <div className="b-photo">
-    <img
-      src="/oluwaseyi.jpg"
-      alt="Oluwaseyi Makinde"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "center top",
-        zIndex: 0,
-      }}
-    />
-   
-  </div>
-</div>
+            <div className="b-cell b-1 reveal reveal-l">
+              <div className="b-photo">
+                <img
+                  src="/oluwaseyi.jpg"
+                  alt="Oluwaseyi Makinde"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    zIndex: 0,
+                  }}
+                />
+              </div>
+            </div>
 
             <div className="b-cell b-2 b-ink b-quote reveal d1">
               <blockquote>
@@ -566,9 +665,9 @@ export default function App() {
             </div>
 
             <div className="b-cell b-3 b-rose-lt b-roles reveal d2">
-  <style dangerouslySetInnerHTML={{ __html: `
-    .rt-ink{background:var(--ink);color:var(--rose-lt)}
-  ` }} />
+              <style dangerouslySetInnerHTML={{ __html: `
+                .rt-ink{background:var(--ink);color:var(--rose-lt)}
+              ` }} />
               <div className="b-role-tag rt2">Strategic Advisor</div>
               <div className="b-role-tag rt1">Co-Founder · Dome</div>
               <div className="b-role-tag rt-ink">Consultant</div>
@@ -576,17 +675,14 @@ export default function App() {
               <div className="b-role-tag rt3">Japada Series</div>
             </div>
 
-        
             <div className="b-cell b-4 b-bone reveal d2">
               <p className="b-bio">
-        Oluwaseyi Makinde is a <strong> strategic advisor</strong> to high-profile leaders, trusted to act on their behalf with sound judgment and discretion while shielding them from unnecessary distractions and operational burdens. Her career spans four countries and three continents, with experience across organizations including <strong> Google, Amazon, the Royal Bank of Canada, the Canadian Armed Forces, Diageo, Globacom, ActionAid, among others.</strong> She is the founder of Dome, a proptech startup transforming the rental experience through technology. Through her Japada series, Oluwaseyi documents her journey of relocating from Canada to Nigeria, sharing insights on building a meaningful life back home.
+                Oluwaseyi Makinde is a <strong> strategic advisor</strong> to high-profile leaders, trusted to act on their behalf with sound judgment and discretion while shielding them from unnecessary distractions and operational burdens. Her career spans four countries and three continents, with experience across organizations including <strong> Google, Amazon, the Royal Bank of Canada, the Canadian Armed Forces, Diageo, Globacom, ActionAid, among others.</strong> She is the co-founder of Dome, a proptech startup transforming the rental experience through technology. Through her Japada series, Oluwaseyi documents her journey of relocating from Canada to Nigeria, sharing insights on building a meaningful life back home.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-     
 
       {/* BUILDS */}
       <section className="builds" id="builds">
@@ -596,171 +692,281 @@ export default function App() {
           <div className="builds-grid">
             <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">01.</div><div className="bc-name"> Strategic Advisor</div><div className="bc-sub">Strategic Advisor · High profile Leaders</div></div><div className="bc-body"><p>Leaders rely on Oluwaseyi to anticipate and solve problems before they surface, protect their time, reputation and vision.</p><a href="#contact" className="bc-link">Enquire about working together</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">02.</div><div className="bc-name">Dome</div><div className="bc-sub">PROPTECH STARTUP · Nigeria</div></div><div className="bc-body"><p>Dome gives you the real story before you rent, with verified reviews and neighbourhood insights that make finding your next home simpler and more transparent.</p><a href="https://usedome.app/" className="bc-link">Download the app</a></div></div>
-            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">@mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series chronicling her journey of relocating from Canada to Nigeria and sharing insights on building a meaningful life back home.</p><a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
+            <div className="bcard reveal d1"><div className="bc-top"><div className="bc-num">03.</div><div className="bc-name">@mommychoplife</div><div className="bc-sub">Lifestyle · Community · Creator</div></div><div className="bc-body"><p>The home of the Japada series chronicling her journey of relocating from Canada to Nigeria and sharing insights on building a meaningful life back home.</p><a href={INSTAGRAM} target="_blank" rel="noopener" className="bc-link">Follow on Instagram</a></div></div>
             <div className="bcard reveal d2"><div className="bc-top"><div className="bc-num">04.</div><div className="bc-name">Speaking &amp; Media</div><div className="bc-sub">Keynote · Panels · Features</div></div><div className="bc-body"><p>Available for keynotes, panels and media features on the Japada movement, women in executive leadership and building strong, intentional personal brands.</p><a href="#contact" className="bc-link">Book a speaking engagement</a></div></div>
           </div>
         </div>
       </section>
-{/* CAREER */}      <section className="career" id="career">        <div className="career-head reveal">          <span className="c-eyebrow">Career Trajectory</span>          <h2 className="c-title">          The journey  <span style={{ color: "var(--champ)" }}></span>     <em>so far</em>          </h2>                 </div><div className="career-prog-row">              <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>              <span className="career-drag">Swipe or scroll to travel the journey</span>            </div>        <div className="career-shell" id="career-shell" ref={shellRef}>          <div className="career-sticky" id="career-sticky">            <div className="career-track-outer">              <div className="career-track" id="career-track" ref={trackRef}>
-   <div className="career-node"><div className="cn-line"></div><div className="cn-year">Nigeria</div><div className="cn-role">Where it all started</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Born and raised in Lagos, Nigeria is where her story begins. It’s where she went to primary and secondary school, built her earliest foundations and, years later, returned to complete NYSC and begin her marketing career, managing major clients and complex campaigns as a Senior Account Manager.</div></div>                <div className="career-node"><div className="cn-line"></div><div className="cn-year">United States</div><div className="cn-role">Where independence began</div><div className="cn-desc">The U.S. gave her first real taste of independence. It’s where she began her undergraduate studies in Economics and got her first “big girl job” as an Assistant to the President of her school, the State University of New York, Buffalo. It’s where she began building the confidence and adaptability that would follow her through every move that came next.</div></div>      <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">Where she built</div><div className="cn-desc">Canada became home for most of her adult life. She completed her Economics degree at York University, Toronto and built a career across various industries that moved through banking, investments, marketing, learning & development while also building a business and family.
-</div></div>      <div className="career-node"><div className="cn-line"></div><div className="cn-year">France </div><div className="cn-role">Where she found her lane</div><div className="cn-desc">Bordeaux was where she earned an MBA in Marketing and Brand Management at INSEEC. France sharpened her interest in brands, people and what makes an idea connect, giving her a foundation she would soon put to work back in Nigeria.</div></div>                 <div className="career-node"><div className="cn-line"></div><div className="cn-year">Nigeria, again</div><div className="cn-role">Where it all comes together</div><div className="cn-desc">Eventually, she came home, this time with years of experience and a much wider view of the world. Today, as General Manager to a prominent faith leader, she works at the centre of a fast-moving world, anticipating her Principal’s needs, protecting his time and vision, resolving complex problems before they become distractions and driving priorities from idea to execution.</div></div>               </div>            </div>                      </div>        </div>      </section>
+
+      {/* CAREER */}
+      <section className="career" id="career">
+        <div className="career-head reveal">
+          <span className="c-eyebrow">Career Trajectory</span>
+          <h2 className="c-title">
+            The journey <em>so far</em>
+          </h2>
+        </div>
+
+        <div className="career-shell" id="career-shell" ref={shellRef}>
+          <div className="career-sticky" id="career-sticky">
+            <div className="career-track-outer">
+              <div className="career-track" id="career-track" ref={trackRef}>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Nigeria</div><div className="cn-role">Where it all started</div><div className="cn-place">Agency · Nigeria</div><div className="cn-desc">Born and raised in Lagos, Nigeria is where her story begins. It’s where she went to primary and secondary school, built her earliest foundations and, years later, returned to complete NYSC and begin her marketing career, managing major clients and complex campaigns as a Senior Account Manager.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">United States</div><div className="cn-role">Where independence began</div><div className="cn-desc">The U.S. gave her first real taste of independence. It’s where she began her undergraduate studies in Economics and got her first “big girl job” as an Assistant to the President of her school, the State University of New York, Buffalo. It’s where she began building the confidence and adaptability that would follow her through every move that came next.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Canada</div><div className="cn-role">Where she built</div><div className="cn-desc">Canada became home for most of her adult life. She completed her Economics degree at York University, Toronto and built a career across various industries that moved through banking, investments, marketing, learning &amp; development while also building a business and family.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">France</div><div className="cn-role">Where she found her lane</div><div className="cn-desc">Bordeaux was where she earned an MBA in Marketing and Brand Management at INSEEC. France sharpened her interest in brands, people and what makes an idea connect, giving her a foundation she would soon put to work back in Nigeria.</div></div>
+                <div className="career-node"><div className="cn-line"></div><div className="cn-year">Nigeria, again</div><div className="cn-role">Where it all comes together</div><div className="cn-desc">Eventually, she came home, this time with years of experience and a much wider view of the world. Today, as General Manager to a prominent faith leader, she works at the centre of a fast-moving world, anticipating her Principal’s needs, protecting his time and vision, resolving complex problems before they become distractions and driving priorities from idea to execution.</div></div>
+              </div>
+            </div>
+
+            <div className="career-prog-row">
+              <div className="career-prog-track"><div className="career-prog-fill" id="career-fill" ref={fillRef}></div></div>
+              <span className="career-drag">Scroll or swipe to travel the journey</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* JAPADA */}
-     {/* JAPADA */}
-<section className="japada" id="japada">
-  <style dangerouslySetInnerHTML={{ __html: `
-    .japada-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-    .japada-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;
-      box-shadow:0 30px 60px rgba(36,27,29,.35)}
-    .japada-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-    .japada-photo::after{content:"";position:absolute;inset:0;
-      background:linear-gradient(160deg,rgba(230,183,189,0) 55%,rgba(142,66,87,.35) 100%)}
-    @media(max-width:820px){
-      .japada-inner{grid-template-columns:1fr;gap:40px}
-      .japada-photo{aspect-ratio:3/4;max-width:460px;margin:0 auto;order:2}
-    }
-  ` }} />
+      <section className="japada" id="japada">
+        <style dangerouslySetInnerHTML={{ __html: `
+          .japada-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+          .japada-player{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;
+            background:var(--ink);box-shadow:0 30px 60px rgba(36,27,29,.35)}
+          .japada-player.playing{aspect-ratio:16/9}
+          .japada-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+          .jp-cover{position:absolute;inset:0;width:100%;height:100%;display:block;padding:0;overflow:hidden}
+          .jp-cover img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s cubic-bezier(.22,.68,0,1)}
+          .jp-cover:hover img{transform:scale(1.04)}
+          .jp-cover::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+            background:linear-gradient(160deg,rgba(230,183,189,0) 45%,rgba(142,66,87,.45) 100%)}
+          .jp-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:84px;height:84px;border-radius:50%;
+            background:rgba(230,183,189,.92);display:flex;align-items:center;justify-content:center;
+            box-shadow:0 10px 40px rgba(36,27,29,.35);transition:transform .25s,background .25s}
+          .jp-cover:hover .jp-play{transform:translate(-50%,-50%) scale(1.08);background:var(--rose)}
+          .jp-play svg{width:28px;height:28px;margin-left:5px;fill:var(--ink)}
+          .jp-label{position:absolute;left:24px;bottom:22px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bone)}
+          button.ep-row{width:100%;text-align:left;font:inherit;color:inherit}
+          .ep-row.active{background:rgba(255,255,255,.2)}
+          .ep-row .ep-badge{display:inline-flex;align-items:center;gap:6px;transition:color .2s}
+          .ep-row:hover .ep-badge,.ep-row.active .ep-badge{color:var(--rose)}
+          .ep-play{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+          .btn-yt{display:inline-flex;align-items:center;gap:10px}
+          .btn-yt svg{width:18px;height:18px;flex-shrink:0}
+          .jf{margin-top:40px;max-width:520px}
+          .jf-label{display:flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:14px}
+          .jf-label::before{content:"";width:24px;height:1px;background:var(--rose);opacity:.7}
+          .jf-frame{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--ink);
+            box-shadow:0 20px 44px rgba(36,27,29,.3)}
+          .jf-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+          .jf-cover{position:absolute;inset:0;width:100%;height:100%;padding:0;display:block;overflow:hidden}
+          .jf-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,.68,0,1)}
+          .jf-cover:hover img{transform:scale(1.04)}
+          .jf-cover::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+            background:linear-gradient(180deg,rgba(36,27,29,0) 40%,rgba(36,27,29,.75) 100%)}
+          .jf-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:62px;height:62px;border-radius:50%;
+            background:rgba(230,183,189,.92);display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s}
+          .jf-cover:hover .jf-play{transform:translate(-50%,-50%) scale(1.08);background:var(--rose)}
+          .jf-play svg{width:22px;height:22px;margin-left:4px;fill:var(--ink)}
+          .jf-title{position:absolute;left:18px;right:18px;bottom:14px;z-index:2;text-align:left;
+            font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.25;color:var(--bone)}
+          @media(max-width:820px){
+            .japada-inner{grid-template-columns:1fr;gap:40px}
+            .japada-media{order:2}
+            .japada-player{aspect-ratio:3/4;width:100%;max-width:460px;margin:0 auto}
+            .japada-player.playing{aspect-ratio:16/9;max-width:none}
+          }
+        ` }} />
 
-  <div className="japada-inner">
-    <div className="reveal reveal-l">
-      <span className="j-eyebrow">The Japada Series</span>
-      <h2 className="j-title">
-        When everyone<br />was leaving,<br />she found <em>balance</em> <br/> by coming <em>back </em>.
-      </h2>
-     
-      <div className="j-eps">
-        <div className="ep-row"><span className="ep-n">01</span><span className="ep-t">Why I came back when everyone was leaving</span><span className="ep-badge">Ep. 1</span></div>
-        <div className="ep-row"><span className="ep-n">02</span><span className="ep-t">The real cost of settling in Lagos — the numbers</span><span className="ep-badge">Ep. 2</span></div>
-        <div className="ep-row"><span className="ep-n">03</span><span className="ep-t">Raising my kids here vs. there</span><span className="ep-badge">Ep. 3</span></div>
-        <div className="ep-row"><span className="ep-n">04</span><span className="ep-t">The artisan wahala nobody warns you about</span><span className="ep-badge">Ep. 4</span></div>
-        <div className="ep-row"><span className="ep-n">05</span><span className="ep-t">Multi-currency life: making it actually work</span><span className="ep-badge">Ep. 5</span></div>
-      </div>
-      <div className="j-ctas">
-        <a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="btn-bone">Watch the series</a>
-      </div>
-    </div>
+        <div className="japada-inner">
+          <div className="reveal reveal-l">
+            <span className="j-eyebrow">The Japada Series</span>
+            <h2 className="j-title">
+              When everyone<br />was leaving,<br />she found <em>balance</em> <br /> by coming <em>back</em>.
+            </h2>
 
-    <div className="japada-photo reveal d2">
-      <img src="/japada.jpg" alt="Oluwaseyi Makinde in Lagos" />
-    </div>
-  </div>
-</section>
-{/* RECOMMENDATIONS */}
-<section className="recs" id="recommendations">
-  <style dangerouslySetInnerHTML={{ __html: `
-    .recs{background:var(--bone);padding:100px 48px;overflow:hidden}
-    .recs-inner{max-width:1200px;margin:0 auto}
-    .recs-head{margin-bottom:56px}
-    .recs-eyebrow{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--plum);display:block;margin-bottom:18px}
-    .recs-title{font-family:var(--serif);font-size:clamp(38px,6vw,70px);font-weight:800;line-height:.95;letter-spacing:-.025em;color:var(--ink)}
-    .recs-title em{font-style:italic;color:var(--plum)}
-    .recs-sub{font-size:16px;color:var(--ink-2);opacity:.7;margin-top:16px;max-width:52ch;line-height:1.6}
-    .recs-grid{columns:3;column-gap:20px}
-    .rec-card{break-inside:avoid;margin-bottom:20px;background:var(--white);border:1px solid rgba(142,66,87,.1);border-radius:16px;padding:30px 28px;transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s}
-    .rec-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px rgba(142,66,87,.13)}
-    .rec-stars{color:var(--champ);font-size:15px;letter-spacing:2px;margin-bottom:16px}
-    .rec-quote{font-size:14.5px;line-height:1.65;color:var(--ink-2)}
-    .rec-quote::before{content:"“";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
-    .rec-quote::after{content:"”";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
-    .rec-who{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(142,66,87,.1)}
-    .rec-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:16px;color:var(--white);background:var(--plum);object-fit:cover}
-    .rec-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
-    .rec-role{font-size:11.5px;color:var(--ink-2);opacity:.65;line-height:1.3;margin-top:2px}
-    @media(max-width:900px){.recs-grid{columns:2}}
-    @media(max-width:600px){.recs{padding:80px 24px}.recs-grid{columns:1}}
-  ` }} />
+            <div className="j-ctas">
+              <a href={seriesHref} target="_blank" rel="noopener" className="btn-bone btn-yt">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z" />
+                  <path fill="#FFFFFF" d="M9.6 15.6 15.8 12 9.6 8.4z" />
+                </svg>
+                Watch on YouTube
+              </a>
+              <a href={INSTAGRAM} target="_blank" rel="noopener" className="btn-ghost-w">
+                Follow on Instagram
+              </a>
+            </div>
 
-  <div className="recs-inner">
-    <div className="recs-head reveal">
-      <span className="recs-eyebrow">Recommendations</span>
-      <h2 className="recs-title">In their <em>own words.</em></h2>
-      <p className="recs-sub">Principals, partners and peers across marketing, finance and tech on what it’s like to work with Oluwaseyi</p>
-    </div>
+            {FEATURED_ID && (
+              <div className="jf">
+                <span className="jf-label">{FEATURED_VIDEO.label}</span>
+                <div className="jf-frame">
+                  {featOn ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${FEATURED_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                      title={FEATURED_VIDEO.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <button type="button" className="jf-cover" onClick={() => setFeatOn(true)} aria-label={`Play: ${FEATURED_VIDEO.title}`}>
+                      <img src={`https://i.ytimg.com/vi/${FEATURED_ID}/hqdefault.jpg`} alt="" loading="lazy" />
+                      <span className="jf-play">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5v15l13-7.5z" /></svg>
+                      </span>
+                      <span className="jf-title">{FEATURED_VIDEO.title}</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
 
-    <div className="recs-grid">
+          <div className="japada-media reveal d2" ref={playerRef}>
+          <div className={`japada-player${ytSrc ? " playing" : ""}`}>
+            {ytSrc ? (
+              <iframe
+                key={ytSrc}
+                src={ytSrc}
+                title="The Japada Series"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <button type="button" className="jp-cover" onClick={() => playEpisode(null)} aria-label="Play The Japada Series">
+                <img src="/japada.jpg" alt="Oluwaseyi Makinde in Lagos" />
+                <span className="jp-play">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5v15l13-7.5z" /></svg>
+                </span>
+                <span className="jp-label">Watch the Japada series</span>
+              </button>
+            )}
+          </div>
+          </div>
+        </div>
+      </section>
 
-      <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">I was particularly inspired as well as impressed by Seyi's ability to handle even the toughest clients effortlessly. A skill that often takes a very long time to master appeared to be natural to her..
+      {/* RECOMMENDATIONS */}
+      <section className="recs" id="recommendations">
+        <style dangerouslySetInnerHTML={{ __html: `
+          .recs{background:var(--bone);padding:100px 48px;overflow:hidden}
+          .recs-inner{max-width:1200px;margin:0 auto}
+          .recs-head{margin-bottom:56px}
+          .recs-eyebrow{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--plum);display:block;margin-bottom:18px}
+          .recs-title{font-family:var(--serif);font-size:clamp(38px,6vw,70px);font-weight:800;line-height:.95;letter-spacing:-.025em;color:var(--ink)}
+          .recs-title em{font-style:italic;color:var(--plum)}
+          .recs-sub{font-size:16px;color:var(--ink-2);opacity:.7;margin-top:16px;max-width:52ch;line-height:1.6}
+          .recs-grid{columns:3;column-gap:20px}
+          .rec-card{break-inside:avoid;margin-bottom:20px;background:var(--white);border:1px solid rgba(142,66,87,.1);border-radius:16px;padding:30px 28px;transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s}
+          .rec-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px rgba(142,66,87,.13)}
+          .rec-stars{color:var(--champ);font-size:15px;letter-spacing:2px;margin-bottom:16px}
+          .rec-quote{font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+          .rec-quote::before{content:"“";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
+          .rec-quote::after{content:"”";font-family:var(--serif);color:var(--rose-dk);font-size:20px;font-weight:700}
+          .rec-who{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(142,66,87,.1)}
+          .rec-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:16px;color:var(--white);background:var(--plum);object-fit:cover}
+          .rec-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+          .rec-role{font-size:11.5px;color:var(--ink-2);opacity:.65;line-height:1.3;margin-top:2px}
+          @media(max-width:900px){.recs-grid{columns:2}}
+          @media(max-width:600px){.recs{padding:80px 24px}.recs-grid{columns:1}}
+        ` }} />
+
+        <div className="recs-inner">
+          <div className="recs-head reveal">
+            <span className="recs-eyebrow">Recommendations</span>
+            <h2 className="recs-title">In their <em>own words.</em></h2>
+            <p className="recs-sub">Principals, partners and peers across marketing, finance and tech on what it’s like to work with Oluwaseyi</p>
+          </div>
+
+          <div className="recs-grid">
+
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">I was particularly inspired as well as impressed by Seyi's ability to handle even the toughest clients effortlessly. A skill that often takes a very long time to master appeared to be natural to her..
 No matter how tense a meeting turned out, you could rely on Seyi to make sure everyone left with a smile. </p>
-        <div className="rec-who">
-          <div className="rec-avatar">E</div>
-          <div>
-            <div className="rec-name">Emmanuel Mang Dickson-Dieke, CDMP</div>
-            <div className="rec-role">Performance Marketing Strategist @ Hey Digital</div>
-          </div>
-        </div>
-      </div>
+              <div className="rec-who">
+                <div className="rec-avatar">E</div>
+                <div>
+                  <div className="rec-name">Emmanuel Mang Dickson-Dieke, CDMP</div>
+                  <div className="rec-role">Performance Marketing Strategist @ Hey Digital</div>
+                </div>
+              </div>
+            </div>
 
-      <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Not only is Seyi a marketing guru, she is
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">Not only is Seyi a marketing guru, she is
 also kind, personable, and very easy to work with. She takes professionalism to a new level. I really enjoyed working with her and already have other projects lined up for her. I absolutely enjoyed working with her and will recommend her to anyone without any reservations</p>
-        <div className="rec-who">
-          <div className="rec-avatar">E</div>
-          <div>
-            <div className="rec-name">Efe Ukala, Esq.</div>
-            <div className="rec-role">VP, Assistant General Counsel at JPMorgan</div>
-          </div>
-        </div>
-      </div>
+              <div className="rec-who">
+                <div className="rec-avatar">E</div>
+                <div>
+                  <div className="rec-name">Efe Ukala, Esq.</div>
+                  <div className="rec-role">VP, Assistant General Counsel at JPMorgan</div>
+                </div>
+              </div>
+            </div>
 
-      <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">I've worked with Seyi in different capacities and on different projects  she is a brilliant and thorough professional. Always available to dissect any brief and provide the best approach to demonstrate value for money. I would not hesitate to recommend her to any organisation that values talent.</p>
-        <div className="rec-who">
-          <div className="rec-avatar">O</div>
-          <div>
-            <div className="rec-name">Odianosen Iseyare, ACIM</div>
-            <div className="rec-role">Marketing Leader · Growth &amp; Digital Strategy</div>
-          </div>
-        </div>
-      </div>
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">I've worked with Seyi in different capacities and on different projects  she is a brilliant and thorough professional. Always available to dissect any brief and provide the best approach to demonstrate value for money. I would not hesitate to recommend her to any organisation that values talent.</p>
+              <div className="rec-who">
+                <div className="rec-avatar">O</div>
+                <div>
+                  <div className="rec-name">Odianosen Iseyare, ACIM</div>
+                  <div className="rec-role">Marketing Leader · Growth &amp; Digital Strategy</div>
+                </div>
+              </div>
+            </div>
 
-      <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but also about your personal and career growth. Seyi is highly brilliant at digital strategy and is a brainbox of ideas - you can always count on her to deliver. During my time working with Seyi, she really inspired me to pursue excellence. Seyi has my highest recommendations anytime.</p>
-        <div className="rec-who">
-          <div className="rec-avatar">P</div>
-          <div>
-            <div className="rec-name">Peace Itimi</div>
-            <div className="rec-role">Marketing, Media &amp; Startups · MBA, Imperial College London</div>
-          </div>
-        </div>
-      </div>
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">Seyi is such an amazing person to work with. She cares not only about the work but also about your personal and career growth. Seyi is highly brilliant at digital strategy and is a brainbox of ideas - you can always count on her to deliver. During my time working with Seyi, she really inspired me to pursue excellence. Seyi has my highest recommendations anytime.</p>
+              <div className="rec-who">
+                <div className="rec-avatar">P</div>
+                <div>
+                  <div className="rec-name">Peace Itimi</div>
+                  <div className="rec-role">Marketing, Media &amp; Startups · MBA, Imperial College London</div>
+                </div>
+              </div>
+            </div>
 
-      <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Without exaggeration, Seyi is the most passionate, well-educated and accomplished person I've had the privilege of working with. Always reliable and professional  her drive to excel is matched only by her generosity of spirit. She'll be a great asset to any organisation she joins.</p>
-        <div className="rec-who">
-          <div className="rec-avatar">M</div>
-          <div>
-            <div className="rec-name">Marc Menard</div>
-            <div className="rec-role">Knowledge &amp; Support Advisor at Alterna Savings</div>
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">Without exaggeration, Seyi is the most passionate, well-educated and accomplished person I've had the privilege of working with. Always reliable and professional  her drive to excel is matched only by her generosity of spirit. She'll be a great asset to any organisation she joins.</p>
+              <div className="rec-who">
+                <div className="rec-avatar">M</div>
+                <div>
+                  <div className="rec-name">Marc Menard</div>
+                  <div className="rec-role">Knowledge &amp; Support Advisor at Alterna Savings</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rec-card reveal">
+              <div className="rec-stars">★★★★★</div>
+              <p className="rec-quote">Oluwaseyi is results-driven, and it shows in the way she works. She has a unique ability to recognise people’s strengths, position them where they can thrive, and bring out their best to achieve exceptional results. She is a true gem. </p>
+              <div className="rec-who">
+                <div className="rec-avatar">E</div>
+                <div>
+                  <div className="rec-name">Samson Adebayo</div>
+                  <div className="rec-role">Chief Creative director, Umbrellab</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-   <div className="rec-card reveal">
-        <div className="rec-stars">★★★★★</div>
-        <p className="rec-quote">Oluwaseyi is results-driven, and it shows in the way she works. She has a unique ability to recognise people’s strengths, position them where they can thrive, and bring out their best to achieve exceptional results. She is a true gem. </p>
-        <div className="rec-who">
-          <div className="rec-avatar">E</div>
-          <div>
-            <div className="rec-name">Samson Adebayo</div>
-            <div className="rec-role">Chief Creative director, Umbrellab</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
+
       {/* PRESS */}
       <div className="press">
         <span className="press-label">As featured in &amp; recognised by</span>
         <div className="press-grid reveal">
           <div className="press-card"><p className="press-q">"When Japa Turns to Japada — a conversation about returning home with purpose and a plan."</p><span className="press-src">Gbemi and toolz O· OffAir Show</span></div>
           <div className="press-card"><p className="press-q">"Being born and raised in Nigeria doesn't mean lack of exposure"</p><span className="press-src">The Japada Pod</span></div>
-          <div className="press-card"><p className="press-q">"
-She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The Japada Pod</span></div>
+          <div className="press-card"><p className="press-q">"She Gave Up Canada... And Never Looked Back"</p><span className="press-src">The Japada Pod</span></div>
         </div>
       </div>
 
@@ -776,7 +982,7 @@ She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The
           <div className="contact-grid">
             <div className="reveal reveal-l">
               <div className="c-links">
-                <a href="https://www.instagram.com/mommychoplife/" target="_blank" rel="noopener" className="c-link">
+                <a href={INSTAGRAM} target="_blank" rel="noopener" className="c-link">
                   <div className="cl-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24">
                       <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -842,24 +1048,24 @@ She Gave Up Canada... And Never Looked Back "</p><span className="press-src">The
       </section>
 
       {/* FOOTER */}
-     <footer className="footer">
-  <style dangerouslySetInnerHTML={{ __html: `
-    .footer-logo{height:66px;width:auto;display:block;flex-shrink:0}
-  ` }} />
+      <footer className="footer">
+        <style dangerouslySetInnerHTML={{ __html: `
+          .footer-logo{height:66px;width:auto;display:block;flex-shrink:0}
+        ` }} />
 
-  <a href="#home" aria-label="Oluwaseyi Makinde — home">
-    <img className="footer-logo" src="/logo.png" alt="Oluwaseyi Makinde" />
-  </a>
+        <a href="#home" aria-label="Oluwaseyi Makinde, home">
+          <img className="footer-logo" src="/logo.png" alt="Oluwaseyi Makinde" />
+        </a>
 
-  <ul className="footer-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#career">Journey</a></li>
-    <li><a href="#builds">Work</a></li>
-    <li><a href="#japada">Japada</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <span className="footer-copy">© 2026 Oluwaseyi Makinde</span>
-</footer>
+        <ul className="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#career">Journey</a></li>
+          <li><a href="#builds">Work</a></li>
+          <li><a href="#japada">Japada</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <span className="footer-copy">© 2026 Oluwaseyi Makinde</span>
+      </footer>
     </>
   );
 }
